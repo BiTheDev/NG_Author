@@ -1,0 +1,12 @@
+<a [routerLink]="['/']">Home</a>
+<p>Edit author</p>
+<div>
+  <form (submit)= "updateAuthor()">
+    <p>Name</p>
+    <p>{{ update | json }}</p>
+    <input type="text" name = "update.name" [(ngModel)]="update.name" [value]="update.name"/>
+    <button type="submit">Update</button>
+  </form>
+  <button (click)="goHome()">Cancel</button>
+
+</div>
