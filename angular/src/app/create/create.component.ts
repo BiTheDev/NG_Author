@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
   newAuthor = {name : ""};
+  errors;
   constructor(private _httpService: HttpService,
     private _route: ActivatedRoute,
     private _router: Router){
@@ -17,11 +18,19 @@ export class CreateComponent implements OnInit {
   CreateAuthor(){
     let obs = this._httpService.createAuthor(this.newAuthor);
     obs.subscribe(data=>{
+      if(data['errors']){
+        console.log(data['errors']);
+        this.errors = data['errors']['name']['message'];
+        console.log(this.errors);   
+        this.newAuthor = {name : ""};
+      }else{
       console.log("Create author success",data);
       this.newAuthor = {name : ""};
       this.goHome();
+      }
     })
   }
+    
   goHome(){
     this._router.navigate(['/']);
   }

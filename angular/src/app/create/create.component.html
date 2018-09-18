@@ -1,5 +1,6 @@
 <a [routerLink]="['/']">Home</a>
 <p>Add a new author</p>
+{{ errors | json }}
 <div>
   <form (submit)= "CreateAuthor()">
     <p>Name</p>

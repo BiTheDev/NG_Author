@@ -6,7 +6,8 @@ goose.connect("mongodb://localhost:27017/Authors", {useNewUrlParser: true},(errs
 const AuthorSchema = new goose.Schema({
     name:{
         type :String,
-        require:true
+        require:true,
+        minlength:2
     },
     
 },{timestamps : true});

@@ -10,6 +10,7 @@ export class EditComponent implements OnInit {
   AuthorId : String;
   AuthorInfo;
   update = {name : ""};
+  errors;
   constructor(private _httpService: HttpService,
     private _route: ActivatedRoute,
     private _router: Router){
@@ -33,10 +34,18 @@ export class EditComponent implements OnInit {
   updateAuthor(){
     let obs = this._httpService.updateAuthor(this.AuthorId,this.update);
     obs.subscribe(data=>{
-      console.log("data update success",data);
-      this.update = {name : ""};
+      if(data['errors']){
+        console.log(data['errors']);
+        this.errors = data['errors']['name']['message'];
+        console.log(this.errors); 
+        this.update = {name : ""}; 
+      }else{
+        console.log("data update success",data);
+      this.update = {name : ""}; 
       this.goHome();
+      }
     })
+   
   }
 
   goHome(){

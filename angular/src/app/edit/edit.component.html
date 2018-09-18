@@ -2,6 +2,7 @@
 <p>Edit author</p>
 <div>
   <form (submit)= "updateAuthor()">
+  {{ errors | json }}
     <p>Name</p>
     <p>{{ update | json }}</p>
     <input type="text" name = "update.name" [(ngModel)]="update.name" [value]="update.name"/>
